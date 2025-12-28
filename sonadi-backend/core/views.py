@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.core.paginator import Paginator
 from django.views.decorators.cache import cache_page
+from django.db.utils import OperationalError
 
 import razorpay
 
