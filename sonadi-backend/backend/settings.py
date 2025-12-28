@@ -178,11 +178,11 @@ AMBULANCE_PHONE = config('AMBULANCE_PHONE', default='')
 # =========================
 # CSRF
 # =========================
-CSRF_TRUSTED_ORIGINS = config(
-    'CSRF_TRUSTED_ORIGINS',
-    default='https://localhost',
-    cast=Csv()
-)
+CSRF_TRUSTED_ORIGINS = [
+    'https://sonadicharitabletrust.org',
+    'https://www.sonadicharitabletrust.org',
+]
+
 
 # =========================
 # SECURITY — AUTO SWITCH (FIXES YOUR SSL BUG)
@@ -203,3 +203,10 @@ else:
     SECURE_HSTS_SECONDS = 0
     SECURE_HSTS_INCLUDE_SUBDOMAINS = False
     SECURE_HSTS_PRELOAD = False
+
+# Cookie SameSite settings
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SAMESITE = 'Lax'
+
+# Trust the X-Forwarded-Proto header from reverse proxies
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
