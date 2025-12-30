@@ -19,3 +19,17 @@ backup.json
 # Database dumps
 *.sql
 *.dump
+
+# Collected static files (regenerated with collectstatic)
+staticfiles/
+
+# Media uploads (user-generated content)
+media/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+
+# Internal documentation
+WEBSITE_READINESS_CHECKLIST.md
