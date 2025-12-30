@@ -19,13 +19,13 @@ A Django-based website for Sonadi Animal Care Center - a non-profit organization
 
 The website automatically sends email notifications to keep both admins and users informed:
 
-| Event                     | Admin Receives              | User Receives           |
-| ------------------------- | --------------------------- | ----------------------- |
-| **Donation Made**         | ✅ Payment notification     | ✅ Thank you receipt    |
-| **Contact Form**          | ✅ New message alert        | ✅ Confirmation email   |
-| **Volunteer Sign-up**     | ✅ New volunteer alert      | ✅ Welcome email        |
-| **Adoption Request**      | ✅ New request notification | ✅ Application received |
-| **Testimonial Submitted** | ✅ Review notification      | -                       |
+| Event                     | Admin Receives              | User Receives              |
+| ------------------------- | --------------------------- | -------------------------- |
+| **Donation Made**         | ✅ Payment notification     | ✅ Thank you receipt       |
+| **Contact Form**          | ✅ New message alert        | ✅ Confirmation email      |
+| **Volunteer Sign-up**     | ✅ New volunteer alert      | ✅ Welcome email           |
+| **Adoption Request**      | ✅ New request notification | ✅ Application received    |
+| **Testimonial Submitted** | ✅ Review notification      | ✅ Submission confirmation |
 
 > 📧 All emails are sent automatically - no manual intervention required!
 
