@@ -182,5 +182,5 @@ This project is for Sonadi Charitable Trust.
 ## Contact
 
 - **Email**: sonadicharitytrust@gmail.com
-- **Phone**: +91 9212797696
+- **Phone**: +91 8527666297
 - **Location**: Masudabad, Near Sai Baba Mandir, Najafgarh, Delhi - 110043
