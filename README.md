@@ -13,6 +13,21 @@ A Django-based website for Sonadi Animal Care Center - a non-profit organization
 - **Activities** - Organization's ongoing initiatives
 - **Gallery/Photos** - Image galleries
 - **Contact** - Contact form with email notifications
+- **Automated Emails** - Notifications sent to admin & users on form submissions
+
+## Automated Email Notifications
+
+The website automatically sends email notifications to keep both admins and users informed:
+
+| Event                     | Admin Receives              | User Receives           |
+| ------------------------- | --------------------------- | ----------------------- |
+| **Donation Made**         | ✅ Payment notification     | ✅ Thank you receipt    |
+| **Contact Form**          | ✅ New message alert        | ✅ Confirmation email   |
+| **Volunteer Sign-up**     | ✅ New volunteer alert      | ✅ Welcome email        |
+| **Adoption Request**      | ✅ New request notification | ✅ Application received |
+| **Testimonial Submitted** | ✅ Review notification      | -                       |
+
+> 📧 All emails are sent automatically - no manual intervention required!
 
 ## Tech Stack
 
@@ -107,15 +122,35 @@ python manage.py runserver
 
 Visit `http://127.0.0.1:8000` in your browser.
 
-## Admin Panel
+## Content Management (No Coding Required)
 
-Access the admin panel at `/admin/` to manage:
+This website includes a **user-friendly admin panel** that allows non-technical users to update website content without any coding knowledge.
 
-- Testimonials (approve/reject submissions)
-- Contact messages
-- Volunteer sign-ups
-- Adoption requests
-- Homepage statistics
+### Accessing the Admin Panel
+
+1. Go to `yourwebsite.com/admin/` (or `http://127.0.0.1:8000/admin/` locally)
+2. Log in with admin credentials
+3. Update content through simple forms
+
+### What You Can Manage
+
+| Section               | What You Can Update                             |
+| --------------------- | ----------------------------------------------- |
+| **Homepage Stats**    | Rescue counts, animals helped, years of service |
+| **Testimonials**      | Add/edit/approve community stories and photos   |
+| **About Page**        | Core values, mission stats                      |
+| **Activities**        | Organization initiatives and descriptions       |
+| **Volunteers**        | View and manage volunteer sign-ups              |
+| **Adoption Requests** | Review and process adoption applications        |
+| **Contact Messages**  | View messages from website visitors             |
+
+### Adding New Content
+
+- **Testimonials**: Add new stories with photos - they appear on the testimonials page
+- **Stats**: Update numbers on homepage without touching code
+- **Activities**: Add new initiatives that automatically display on the website
+
+> 💡 **Tip**: Any changes made in the admin panel are reflected on the website immediately - no deployment or coding required!
 
 ## Deployment
 
