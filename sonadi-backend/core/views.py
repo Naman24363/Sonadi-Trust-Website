@@ -18,7 +18,6 @@ from .models import (
 )
 
 # Home Page View
-# Home Page View
 @cache_page(60 * 5)  # Cache for 5 minutes
 def home(request):
     try:
