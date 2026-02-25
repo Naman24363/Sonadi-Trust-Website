@@ -16,6 +16,16 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- DNS prefetch for external resources (skipping fonts.googleapis.com — already covered by preconnect above) -->
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//unpkg.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    
+    <!-- Preload critical assets (placed before stylesheets so the browser fetches them early) -->
+    <link rel="preload" href="{% static 'img/sonadi-logo.jpg' %}" as="image">
+    <link rel="preload" href="{% static 'js/main.js' %}" as="script">
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
@@ -68,17 +78,6 @@
     <link rel="stylesheet" href="{% static 'css/animations.css' %}">
     {% block page_css %}{% endblock %}
     
-    <!-- Preload critical assets -->
-    <link rel="preload" href="{% static 'img/sonadi-logo.jpg' %}" as="image">
-    <link rel="preload" href="{% static 'css/base.css' %}" as="style">
-    <link rel="preload" href="{% static 'js/main.js' %}" as="script">
-    
-    <!-- DNS prefetch for external resources -->
-    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link rel="dns-prefetch" href="//unpkg.com">
-    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
-    
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -119,8 +118,7 @@
                 AOS.init({
                     duration: 1000,
                     easing: 'ease-out-cubic',
-                    once: false,
-                    mirror: true,
+                    once: true,
                     offset: 120,
                     delay: 100,
                     anchorPlacement: 'top-bottom'
