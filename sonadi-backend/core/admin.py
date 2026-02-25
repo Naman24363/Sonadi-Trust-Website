@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import Testimonial, ContactMessage, Volunteer, AdoptionRequest
+from .models import (
+    Testimonial, ContactMessage, Volunteer, AdoptionRequest,
+    HomepageStats, CoreValue, AboutStats, ActivityInfo,
+)
 
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
@@ -18,19 +21,8 @@ class VolunteerAdmin(admin.ModelAdmin):
 class AdoptionRequestAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'animal_name', 'submitted_at')
 
-from .models import HomepageStats
-
 admin.site.register(HomepageStats)
-
-from .models import CoreValue  # (if not already)
-
 admin.site.register(CoreValue)
-
-from .models import AboutStats
-
 admin.site.register(AboutStats)
-
-from .models import ActivityInfo
-
 admin.site.register(ActivityInfo)
 

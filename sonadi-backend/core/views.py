@@ -31,6 +31,7 @@ def home(request):
     return render(request, 'home.html', {'stats': stats, 'values': values})
 
 # About Page View
+@cache_page(60 * 15)  # Cache for 15 minutes
 def about(request):
     stats = AboutStats.objects.first()
     return render(request, 'about.html', {'about_stats': stats})
@@ -411,6 +412,7 @@ Personality: {animal_personality}
     return render(request, 'adopt-a-dog.html', {'form': form})
 
 # Activities Page View
+@cache_page(60 * 15)  # Cache for 15 minutes
 def activities(request):
     activity_info = ActivityInfo.objects.first()
     return render(request, 'activities.html', {'activity_info': activity_info})

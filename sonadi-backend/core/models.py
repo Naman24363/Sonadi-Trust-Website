@@ -81,7 +81,6 @@ class AdoptionRequest(models.Model):
     def __str__(self):
         return f"{self.name} wants to adopt {self.animal_name}"
 
-from django.db import models
 
 class HomepageStats(models.Model):
     animals_rescued = models.CharField(max_length=50, default='10,000+')

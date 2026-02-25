@@ -72,8 +72,6 @@ TEMPLATES = [
     },
 ]
 
-import dj_database_url
-
 # Use PostgreSQL if DATABASE_URL is set, otherwise fallback to SQLite for local development
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
