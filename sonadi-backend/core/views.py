@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.core.paginator import Paginator
 from django.views.decorators.cache import cache_page
 from django.db.utils import OperationalError
+from django.http import HttpResponse
 
 import razorpay
 
@@ -16,6 +17,12 @@ from .forms import (
 from .models import (
     Testimonial, HomepageStats, CoreValue, AboutStats, ActivityInfo
 )
+
+
+# Health Check Endpoint (DB-free)
+def healthz(request):
+    return HttpResponse("OK", content_type="text/plain")
+
 
 # Home Page View
 # Home Page View

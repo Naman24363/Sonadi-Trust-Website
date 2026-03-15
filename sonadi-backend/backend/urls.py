@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('healthz/', views.healthz),  # Health check endpoint (DB-free)
 
     # Core Views
     path('', views.home, name='home'),
