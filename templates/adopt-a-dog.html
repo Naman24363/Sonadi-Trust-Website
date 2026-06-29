@@ -7,29 +7,22 @@
 <link rel="stylesheet" href="{% static 'css/adopt-a-dog.css' %}">
 {% endblock %}
 
-{% block content %} {% if messages %}
-    <div class="message-container">
+{% block content %}
+    {% if messages %}
+    <div class="message-container" id="thanks">
       {% for message in messages %}
       <div class="success-message">{{ message }}</div>
       {% endfor %}
     </div>
     {% endif %}
 
-    <div class="page-heading">
-      <img
-        src="{% static 'img/sonadi-logo.jpg' %}"
-        alt="Sonadi Charitable Trust Logo"
-        class="logo-img"
-      />
-      <div class="page-heading-text">
-        <h2>Adopt a Dog</h2>
-        <h3>Give a Loving Home to a Friend</h3>
+    <div class="page-hero hero--adopt">
+      <div class="page-hero-content">
+        <h1>Adopt a Dog</h1>
+        <p>Give a Loving Home to a Friend</p>
       </div>
     </div>
-    <blockquote class="highlight-quote">
-      We believe every pet deserves a loving home. Meet our furry friends
-      waiting to be a part of your family.
-    </blockquote>
+
 
     <section>
       <div class="animal-gallery">
@@ -214,15 +207,31 @@
         const modal = document.getElementById("adoptionForm");
         modal.classList.add("show");
         modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
       }
 
       function closeForm() {
         const modal = document.getElementById("adoptionForm");
         modal.classList.remove("show");
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
         setTimeout(() => {
           modal.style.display = "none";
         }, 300);
       }
+
+      // Loading state on adopt form submit
+      document.getElementById("adoptionForm").querySelector("form").addEventListener("submit", function(e) {
+        const btn = this.querySelector('button[type="submit"]');
+        if (!btn) return;
+        queueMicrotask(function() {
+          if (!e.defaultPrevented) {
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Submitting...';
+            btn.disabled = true;
+          }
+        });
+      });
 
       window.onclick = function (event) {
         const modal = document.getElementById("adoptionForm");
@@ -244,6 +253,13 @@
 <script>
   if (window.location.hash === "#thanks") {
     closeForm();
+    // Scroll the success message into view
+    const thanksEl = document.getElementById("thanks");
+    if (thanksEl) {
+      setTimeout(function() {
+        thanksEl.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 100);
+    }
   }
 </script>
 {% endblock %}

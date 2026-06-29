@@ -9,12 +9,17 @@ import os
 # =========================
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = config(
-    'SECRET_KEY',
-    default='django-insecure-fallback-key-for-development-only-change-in-production'
-)
+_INSECURE_KEY = 'django-insecure-fallback-key-for-development-only-change-in-production'
+SECRET_KEY = config('SECRET_KEY', default=_INSECURE_KEY)
 
 DEBUG = config('DEBUG', default=False, cast=bool)
+
+# Crash loudly if an insecure key is used outside local development
+if not DEBUG and SECRET_KEY == _INSECURE_KEY:
+    raise RuntimeError(
+        "SECRET_KEY is not set. "
+        "Set the SECRET_KEY environment variable before running in production."
+    )
 
 ALLOWED_HOSTS = config(
     'ALLOWED_HOSTS',

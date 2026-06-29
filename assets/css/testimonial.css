@@ -2,35 +2,34 @@
    TESTIMONIAL PAGE STYLES
    =========================================== */
 
-/* Programs, Pets, Testimonials */
-.programs,
-.pets,
+/* Grid layout for testimonial cards */
 .testimonials {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  padding: 32px 5vw;
+  background-color: var(--body-bg);
+  margin-top: 0;
 }
 
-/* Testimonial Button */
-.testimonial-btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: var(--primary-green);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.2s;
-  background-color: var(--primary-green);
-  color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  transition: background-color 0.3s ease;
+/* Testimonial card */
+.testimonials .card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: auto;
+  height: auto;
+  opacity: 1;
+  transform: none;
 }
 
-.testimonial-btn:hover {
-  background-color: var(--primary-green-dark);
+.testimonials .card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
+
+/* Card image */
+.testimonials .card img

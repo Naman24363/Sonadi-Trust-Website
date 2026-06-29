@@ -2,83 +2,126 @@
    FOUNDERS PAGE STYLES
    =========================================== */
 
+/* Founders wrapper */
+.founders-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 32px 5vw;
+  background-color: var(--body-bg);
+}
+
 /* Founder Card */
 .founder-card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 30px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   flex: 1 1 40%;
   min-width: 300px;
-  max-width: 500px;
+  max-width: 420px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   box-sizing: border-box;
-  background-color: #ffffff;
-  width: 100%;
-  padding: 24px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .founder-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  transform: scale(1.03);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
-.founder-card h3 {
-  font-size: 1.4em;
-  color: #333;
-  margin-bottom: 10px;
+/* Founder image */
+.founder-img {
+  display: block;
+  max-width: 170px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin: 0 auto 20px;
+  border: 3px solid var(--primary-green);
+  border-radius: 14px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
 }
 
+.founder-card:hover .founder-img {
+  transform: scale(1.02);
+}
+
+/* Founder name */
+.founder-name {
+  font-size: 1.5rem;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+/* Founder role */
 .founder-role {
+  font-size: 1.1rem;
   font-weight: bold;
-  font-size: 1.1em;
   color: var(--primary-green);
   margin-bottom: 15px;
-  color: #2e7d32;
-  margin: 10px 0 14px;
 }
 
+/* Founder quote */
+.founder-quote {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Founder bio (used in older layouts) */
 .founder-bio {
   text-align: justify;
-  font-size: 1em;
+  font-size: 1rem;
   line-height: 1.6;
   color: #444;
-  margin-bottom: 15px;
-  line-height: 1.6;
-  font-size: 1rem;
   margin-bottom: 14px;
 }
 
-.founder-img {
-  display: block;
-  max-width: 100%;
-  width: 180px;
-  height: auto;
-  border-radius: 12px;
-  margin: 0 auto 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  object-fit: contain;
-  border: 4px solid var(--primary-green);
+/* Achievement list */
+.founder-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
 }
 
-/* Quote Styles */
-.highlight-quote-founders {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 16px 24px;
-  font-style: italic;
-  background-color: #f1f1f1;
-  border-left: 6px solid var(--primary-green, #2e7d32);
+.founder-list li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 12px;
+  font-size: 1rem;
   color: #444;
-  text-align: center;
-  font-size: 1.05rem;
-  border-radius: 6px;
-  margin-bottom: -1px;
 }
+
+.founder-list li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--primary-green);
+  font-weight: bold;
+}
+
+/* Photo caption */
+.caption {
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+/* Quote uses shared .highlight-quote from base.css */
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .founder-card {
-    margin: 0 auto 20px auto;
+    min-width: 280px;
+    max-width: 100%;
+    margin: 0 auto;
   }
 }

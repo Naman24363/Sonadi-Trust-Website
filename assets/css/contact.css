@@ -2,6 +2,28 @@
    CONTACT PAGE STYLES
    =========================================== */
 
+/* Two-column grid inside the card wrapper */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* White card wrapper around the form + info columns */
+.contact-card-wrapper {
+  background-color: #ffffff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  padding: 40px 30px;
+  margin-top: 2rem;
+}
+
 /* Contact Container */
 .contact-container {
   max-width: 1100px;
@@ -42,30 +64,4 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
-.contact-info h2 {
-  margin-bottom: 20px;
-  color: var(--primary-green);
-}
-
-.contact-info a {
-  color: var(--primary-green);
-  text-decoration: none;
-}
-
-.contact-info a:hover {
-  text-decoration: underline;
-}
-
-/* Map Section */
-.map-section iframe {
-  border-radius: 10px;
-  width: 100%;
-  height: 400px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
-/* Phone Number */
-.phone-number {
-  font-weight: bold;
-  color: var(--text-main);
-}
+.conta

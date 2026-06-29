@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 from django.views.decorators.cache import cache_page
 from django.db.utils import OperationalError
 from django.http import HttpResponse
+import threading
 
 import razorpay
 
@@ -18,6 +19,25 @@ from .models import (
     Testimonial, HomepageStats, CoreValue, AboutStats, ActivityInfo
 )
 
+# ------------------------------------------------------------------
+# Simple cache-based rate limiter (no extra packages needed)
+# Limits each IP to max_calls POST requests per window_seconds.
+# ------------------------------------------------------------------
+def _is_rate_limited(request, key_prefix, max_calls=5, window_seconds=60):
+    from django.core.cache import cache
+    ip = (
+        request.META.get('HTTP_X_FORWARDED_FOR', '').split(',')[0].strip()
+        or request.META.get('REMOTE_ADDR', 'unknown')
+    )
+    cache_key = f"rl:{key_prefix}:{ip}"
+    count = cache.get(cache_key, 0)
+    if count >= max_calls:
+        return True
+    cache.set(cache_key, count + 1, timeout=window_seconds)
+    return False
+
+
+
 
 # Health Check Endpoint (DB-free)
 def healthz(request):
@@ -25,7 +45,6 @@ def healthz(request):
 
 
 # Home Page View
-@cache_page(60 * 5)  # Cache for 5 minutes
 def home(request):
     try:
         stats = HomepageStats.objects.first()
@@ -37,14 +56,19 @@ def home(request):
     return render(request, 'home.html', {'stats': stats, 'values': values})
 
 # About Page View
-@cache_page(60 * 15)  # Cache for 15 minutes
 def about(request):
-    stats = AboutStats.objects.first()
+    try:
+        stats = AboutStats.objects.first()
+    except OperationalError:
+        stats = None
     return render(request, 'about.html', {'about_stats': stats})
 
 # Contact Page View
 def contact(request):
     if request.method == 'POST':
+        if _is_rate_limited(request, 'contact', max_calls=5, window_seconds=60):
+            messages.error(request, "Too many submissions. Please wait a minute and try again.")
+            return redirect('contact')
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
@@ -161,9 +185,11 @@ def donate_payment(request):
 
 # Payment Success Handler
 def donate_success(request):
-    payment_id = request.GET.get('razorpay_payment_id')
-    order_id = request.GET.get('razorpay_order_id')
-    signature = request.GET.get('razorpay_signature')
+    # Accept POST (preferred — keeps signature out of URL/logs) or GET (legacy)
+    params = request.POST if request.method == 'POST' else request.GET
+    payment_id = params.get('razorpay_payment_id')
+    order_id   = params.get('razorpay_order_id')
+    signature  = params.get('razorpay_signature')
     
     if payment_id and order_id:
         # Verify payment signature for security
@@ -181,9 +207,10 @@ def donate_success(request):
             # Get payment details
             payment = client.payment.fetch(payment_id)
             
-            # Send confirmation email if donor email is available
+            # Send confirmation email in background thread — don't block the response
             if payment.get('notes', {}).get('donor_email'):
-                send_donation_receipt(payment)
+                t = threading.Thread(target=send_donation_receipt, args=(payment,), daemon=True)
+                t.start()
             
             context = {
                 'payment_id': payment_id,
@@ -273,6 +300,9 @@ def testimonial(request):
     testimonials = paginator.get_page(page_number)
 
     if request.method == 'POST':
+        if _is_rate_limited(request, 'testimonial', max_calls=3, window_seconds=60):
+            messages.error(request, "Too many submissions. Please wait a minute and try again.")
+            return redirect('testimonial')
         form = TestimonialForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
@@ -324,6 +354,9 @@ Message:
 # Volunteer Page View
 def volunteer(request):
     if request.method == 'POST':
+        if _is_rate_limited(request, 'volunteer', max_calls=3, window_seconds=60):
+            messages.error(request, "Too many submissions. Please wait a minute and try again.")
+            return redirect('volunteer')
         form = VolunteerForm(request.POST)
         if form.is_valid():
             form.save()
@@ -367,6 +400,9 @@ Message:
 # Adoption Page View
 def adopt_a_dog(request):
     if request.method == 'POST':
+        if _is_rate_limited(request, 'adopt', max_calls=3, window_seconds=60):
+            messages.error(request, "Too many submissions. Please wait a minute and try again.")
+            return redirect('adopt_a_dog')
         form = AdoptionForm(request.POST)
         if form.is_valid():
             form.save()
@@ -425,8 +461,8 @@ def activities(request):
 
 # Static Page Views
 def gallery(request):
-    # Redirect to photos page since gallery.html doesn't exist
-    return render(request, 'photos.html')
+    # /gallery/ is not linked anywhere; redirect to /photos/ to avoid dead route
+    return redirect('photos')
 
 def founders(request):
     return render(request, 'founders.html')

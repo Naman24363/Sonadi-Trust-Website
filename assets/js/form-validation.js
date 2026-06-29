@@ -41,6 +41,7 @@ const formValidation = {
     // Clear error message
     clearError(input) {
         const formGroup = input.closest('.form-group');
+        if (!formGroup) return;  // input is not inside a .form-group — skip
         const errorDiv = formGroup.querySelector('.invalid-feedback');
         
         input.classList.remove('is-invalid');

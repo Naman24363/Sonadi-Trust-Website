@@ -27,13 +27,13 @@
 /* Pulse effect for attention */
 @keyframes pulseGlow {
   0% {
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+    box-shadow: 0 0 5px rgba(30, 70, 32, 0.15);
   }
   50% {
-    box-shadow: 0 0 20px rgba(76, 175, 80, 0.4);
+    box-shadow: 0 0 20px rgba(30, 70, 32, 0.3);
   }
   100% {
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+    box-shadow: 0 0 5px rgba(30, 70, 32, 0.15);
   }
 }
 
@@ -83,7 +83,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 30px;
-  animation: pageSlideIn 0.8s ease-ut;
+  animation: pageSlideIn 0.8s ease-out;
   margin: 0 auto;
 }
 
@@ -111,7 +111,7 @@
   overflow: hidden;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  border: 3px solid #4caf50;
+  border: 3px solid #1e4620;
   background: #f0f0f0;
 }
 
@@ -119,11 +119,11 @@
 @keyframes slideShowPulse {
   0%, 100% {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    border-color: rgba(76, 175, 80, 0.3);
+    border-color: rgba(30, 70, 32, 0.2);
   }
   50% {
-    box-shadow: 0 15px 40px rgba(76, 175, 80, 0.2);
-    border-color: rgba(76, 175, 80, 0.6);
+    box-shadow: 0 15px 40px rgba(30, 70, 32, 0.15);
+    border-color: rgba(30, 70, 32, 0.5);
   }
 }
 
@@ -135,7 +135,7 @@
   right: 0;
   bottom: 0;
   background: linear-gradient(45deg, 
-    rgba(76, 175, 80, 0.1) 0%, 
+    rgba(30, 70, 32, 0.08) 0%, 
     rgba(46, 125, 50, 0.05) 100%);
   z-index: 1;
   opacity: 0;
@@ -177,7 +177,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(76, 175, 80, 0.8);
+  background: rgba(30, 70, 32, 0.85);
   color: white;
   border: 2px solid white;
   width: 60px;
@@ -234,9 +234,9 @@
 }
 
 .slideshow-dot.active {
-  background: rgba(76, 175, 80, 0.9);
+  background: rgba(30, 70, 32, 0.9);
   transform: scale(1.4);
-  border-color: rgba(76, 175, 80, 0.9);
+  border-color: rgba(30, 70, 32, 0.9);
 }
 
 .slideshow-dot:hover {
@@ -250,7 +250,7 @@
   bottom: 0;
   left: 0;
   height: 4px;
-  background: rgba(76, 175, 80, 0.8);
+  background: rgba(30, 70, 32, 0.85);
   z-index: 10;
   transition: width 0.3s ease;
   border-radius: 0 0 15px 15px;
@@ -332,8 +332,8 @@
   100% { width: 100%; }
 }
 
-/* Form Styles */
-form {
+/* Form — scoped to volunteer-right to avoid overriding base.css on other pages */
+.volunteer-right form {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -342,75 +342,27 @@ form {
   animation: scaleUp 0.8s ease-out 0.7s forwards;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-  position: relative;
+.volunteer-right .form-group {
   opacity: 0;
   transform: translateX(20px);
   animation: slideInRight 0.6s ease-out forwards;
   animation-delay: calc(0.8s + var(--form-delay, 0) * 0.1s);
 }
 
-.form-group:nth-child(1) { --form-delay: 1; }
-.form-group:nth-child(2) { --form-delay: 2; }
-.form-group:nth-child(3) { --form-delay: 3; }
-.form-group:nth-child(4) { --form-delay: 4; }
-.form-group:nth-child(5) { --form-delay: 5; }
+.volunteer-right .form-group:nth-child(1) { --form-delay: 1; }
+.volunteer-right .form-group:nth-child(2) { --form-delay: 2; }
+.volunteer-right .form-group:nth-child(3) { --form-delay: 3; }
+.volunteer-right .form-group:nth-child(4) { --form-delay: 4; }
+.volunteer-right .form-group:nth-child(5) { --form-delay: 5; }
 
-label {
-  margin-top: 5px;
-  font-weight: bold;
-  font-size: 0.95rem;
-  color: #333;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-label::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--primary-green, #4caf50);
-  transition: width 0.3s ease;
-}
-
-.form-group:focus-within label::after {
-  width: 100%;
-}
-
-.form-group:focus-within label {
-  color: var(--primary-green, #4caf50);
-  transform: translateY(-2px);
-}
-
-input,
-textarea {
-  padding: 12px 15px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 2px solid #e0e0e0;
-  resize: vertical;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: #fff;
-  font-family: inherit;
-}
-
-input:focus,
-textarea:focus {
-  outline: none;
-  border-color: var(--primary-green, #4caf50);
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
-  transform: translateY(-2px);
+.volunteer-right input:focus,
+.volunteer-right textarea:focus {
+  box-shadow: 0 0 0 3px rgba(30, 70, 32, 0.08);
   background: #fafafa;
 }
 
-input:hover,
-textarea:hover {
+.volunteer-right input:hover,
+.volunteer-right textarea:hover {
   border-color: #c0c0c0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
@@ -442,7 +394,7 @@ textarea:hover {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(76, 175, 80, 0.05),
+    rgba(30, 70, 32, 0.04),
     transparent
   );
   transition: left 0.8s ease;
@@ -457,52 +409,11 @@ textarea:hover {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* Submit button with enhanced animations */
-.submit-btn {
-  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-  color: white;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 25px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+/* Submit button: uses shared .submit-btn from base.css — no override needed */
+.volunteer-right .submit-btn {
   opacity: 0;
   transform: translateY(20px);
   animation: slideInRight 0.6s ease-out 1.5s forwards;
-}
-
-.submit-btn::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.6s ease;
-}
-
-.submit-btn:hover::before {
-  width: 300px;
-  height: 300px;
-}
-
-.submit-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
-  background: linear-gradient(135deg, #45a049 0%, #4caf50 100%);
-}
-
-.submit-btn:active {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
 }
 
 .volunteer-form label {
@@ -530,73 +441,9 @@ textarea:hover {
   resize: vertical;
 }
 
-/* Quote Styles */
-.highlight-quote-volunteer {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px 30px;
-  font-style: italic;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
-  border-left: 6px solid var(--primary-green, #2e7d32);
-  color: #444;
-  text-align: center;
-  font-size: 1.1rem;
-  border-radius: 12px;
-  margin-top: -20px;
-  margin-bottom: -25px;
-  position: relative;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: slideInLeft 0.8s ease-out 0.2s forwards;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
+/* Quote uses shared .highlight-quote from base.css */
 
-.highlight-quote-volunteer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(76, 175, 80, 0.1),
-    transparent
-  );
-  transition: left 0.8s ease;
-}
-
-.highlight-quote-volunteer:hover::before {
-  left: 100%;
-}
-
-.highlight-quote-volunteer:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  border-left: 6px solid #1b5e20;
-}
-
-/* Success message animation */
-.success-message {
-  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-  color: white;
-  padding: 15px 25px;
-  border-radius: 8px;
-  text-align: center;
-  margin: 20px auto;
-  max-width: 600px;
-  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-  animation: 
-    slideInRight 0.6s ease-out,
-    pulseGlow 2s ease-in-out infinite 1s;
-}
-
-/* Page heading enhancements */
-.page-heading {
-  opacity: 1;
-}
+/* Success message: uses shared .success-message from base.css — no override */
 
 /* Mobile Responsive - stack only on very small screens */
 @media (max-width: 599px) {
@@ -650,11 +497,6 @@ textarea:hover {
     animation-delay: calc(0.5s + var(--form-delay, 0) * 0.08s);
   }
   
-  .highlight-quote-volunteer {
-    padding: 15px 20px;
-    font-size: 1rem;
-  }
-  
   .submit-btn {
     padding: 12px 25px;
     font-size: 1rem;
@@ -672,11 +514,6 @@ textarea:hover {
 }
 
 /* Loading animation for form submission */
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
 .submit-btn.loading {
   position: relative;
   color: transparent;
@@ -698,7 +535,7 @@ textarea:hover {
 
 /* Enhanced form group states */
 .form-group.focused label {
-  color: var(--primary-green, #4caf50);
+  color: var(--primary-green);
   transform: translateY(-4px);
 }
 
@@ -707,7 +544,7 @@ textarea:hover {
 }
 
 .form-group.form-group-filled label {
-  color: var(--primary-green, #4caf50);
+  color: var(--primary-green);
 }
 
 /* Loading spinner for submit button */
@@ -744,7 +581,7 @@ textarea:hover {
 }
 
 .notification-success {
-  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  background: linear-gradient(135deg, #1e4620 0%, #163518 100%);
 }
 
 .notification-error {
@@ -919,15 +756,4 @@ textarea:hover {
   .slide {
     height: 300px;
   }
-}
-
-/* Subtle background animation */
-@keyframes backgroundShimmer {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-body {
-  background: #fff;
 }

@@ -282,16 +282,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof gsap !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Animate founder cards
+        // Animate founder cards — both cards animate simultaneously (no stagger)
+        // so they always reach their final y:0 position at the same time.
         gsap.from('.founder-card', {
             scrollTrigger: {
-                trigger: '.founders-section',
+                trigger: '.founders-wrapper',
                 start: 'top 80%'
             },
             duration: 0.8,
             y: 50,
             opacity: 0,
-            stagger: 0.3,
             ease: 'power2.out'
         });
 

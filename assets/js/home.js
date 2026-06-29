@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
             scrollTrigger: {
               trigger: item,
               start: "top 95%",
-              toggleActions: "play none none reverse",
+              toggleActions: "play none none none",
             },
           }
         );
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
               scrollTrigger: {
                 trigger: item,
                 start: "top 95%",
-                toggleActions: "play none none reverse",
+                toggleActions: "play none none none",
               },
               onUpdate: function () {
                 const progress = this.progress();
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
             scrollTrigger: {
               trigger: card,
               start: "top 85%",
-              toggleActions: "play none none reverse",
+              toggleActions: "play none none none",
             },
           }
         );
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
               scrollTrigger: {
                 trigger: card,
                 start: "top 80%",
-                toggleActions: "play none none reverse",
+                toggleActions: "play none none none",
               },
             }
           );
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
               scrollTrigger: {
                 trigger: card,
                 start: "top 80%",
-                toggleActions: "play none none reverse",
+                toggleActions: "play none none none",
               },
             }
           );
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
               scrollTrigger: {
                 trigger: card,
                 start: "top 80%",
-                toggleActions: "play none none reverse",
+                toggleActions: "play none none none",
               },
             }
           );
@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Fallback CSS animations for when GSAP is not available
     document
-      .querySelectorAll(".hero-title, .hero-subtitle, .hero-buttons")
+      .querySelectorAll(".hero-title, .hero-subtitle, .hero-buttons, .stat-item, .info-card")
       .forEach((el) => {
         el.style.opacity = "1";
         el.style.transform = "none";

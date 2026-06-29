@@ -10,15 +10,20 @@ document.addEventListener('DOMContentLoaded', function() {
     if (contactForm && contactForm.closest('.contact-card-wrapper')) {
         // Add loading state on form submit (but let Django handle the actual submission)
         contactForm.addEventListener('submit', function(e) {
+            // Only disable the button if the form is actually valid and submitting.
+            // formValidation may call e.preventDefault() for invalid fields;
+            // checking e.defaultPrevented after a microtask tells us if that happened.
             const submitBtn = this.querySelector('button[type="submit"]');
-            if (submitBtn) {
-                // Use setTimeout to allow form submission to proceed before disabling
-                setTimeout(function() {
+            if (!submitBtn) return;
+
+            // Use queueMicrotask so we check AFTER any e.preventDefault() calls
+            // from other listeners (e.g. formValidation) have had a chance to run.
+            queueMicrotask(function() {
+                if (!e.defaultPrevented) {
                     submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Sending...';
                     submitBtn.disabled = true;
-                }, 10);
-            }
-            // Don't prevent default - let Django handle the form submission
+                }
+            });
         });
     }
 

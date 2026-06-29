@@ -1,13 +1,8 @@
 {% extends 'base.html' %} {% load static %} {% block title %}Donate | Sonadi
 Charitable Trust{% endblock %} {% block page_css %}
-<link rel="stylesheet" href="{% static 'css/donate.css' %}?v=2025" />
+<link rel="stylesheet" href="{% static 'css/donate.css' %}" />
 {% endblock %} {% block extra_css %}
 <style>
-  /* Force browser refresh - Cache buster */
-  .page-heading.donate-hero {
-    margin-bottom: 40px !important;
-  }
-
   .donate-section {
     margin-top: 40px !important;
     margin-bottom: 60px !important;
@@ -35,12 +30,12 @@ Charitable Trust{% endblock %} {% block page_css %}
   }
 
   .bank-details-text {
-    background-color: #e9f9e8;
+    background-color: #f0ebe2;
     padding: 30px;
     border-radius: 12px;
     max-width: 600px;
     width: 100%;
-    box-shadow: 0 4px 16px rgba(76, 175, 80, 0.1);
+    box-shadow: 0 4px 16px rgba(30, 70, 32, 0.08);
     line-height: 1.6;
   }
 
@@ -73,7 +68,7 @@ Charitable Trust{% endblock %} {% block page_css %}
 
   .bank-section {
     padding: 40px 20px;
-    background: linear-gradient(135deg, #f8fffe 0%, #e8f5e8 100%);
+    background: linear-gradient(135deg, #faf7f2 0%, #f0ebe2 100%);
     border-radius: 16px;
     margin: 40px 0;
   }
@@ -85,13 +80,12 @@ Charitable Trust{% endblock %} {% block page_css %}
     background: white;
     padding: 40px;
     border-radius: 16px;
-    box-shadow: 0 6px 32px rgba(76, 175, 80, 0.08);
-    border: 1px solid #e8f5e8;
+    box-shadow: 0 6px 32px rgba(30, 70, 32, 0.06);
+    border: 1px solid var(--border-warm);
   }
 
   .amount-selection h3,
-  .donor-info h3,
-  .donation-purpose h3 {
+  .donor-info h3 {
     color: var(--primary-green-dark);
     margin-bottom: 20px;
     font-size: 1.3rem;
@@ -107,7 +101,7 @@ Charitable Trust{% endblock %} {% block page_css %}
 
   .amount-option {
     padding: 20px;
-    border: 2px solid #e8f5e8;
+    border: 2px solid var(--border-warm);
     border-radius: 12px;
     text-align: center;
     cursor: pointer;
@@ -117,12 +111,12 @@ Charitable Trust{% endblock %} {% block page_css %}
 
   .amount-option:hover {
     border-color: var(--primary-green);
-    box-shadow: 0 4px 16px rgba(76, 175, 80, 0.15);
+    box-shadow: 0 4px 16px rgba(30, 70, 32, 0.1);
   }
 
   .amount-option.selected {
     border-color: var(--primary-green);
-    background: linear-gradient(135deg, #e8f5e8, #f0fdf0);
+    background: linear-gradient(135deg, #f0ebe2, #faf7f2);
   }
 
   .amount-option .amount {
@@ -239,38 +233,6 @@ Charitable Trust{% endblock %} {% block page_css %}
     min-height: 100px;
   }
 
-  /* Purpose options styling */
-  .purpose-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-bottom: 30px;
-  }
-
-  .purpose-option {
-    padding: 15px;
-    border: 2px solid #e8f5e8;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .purpose-option:hover {
-    border-color: var(--primary-green);
-  }
-
-  .purpose-option input[type="radio"]:checked + span {
-    color: var(--primary-green-dark);
-    font-weight: 600;
-  }
-
-  .purpose-option input[type="radio"]:checked {
-    accent-color: var(--primary-green);
-  }
-
   /* Submit button using site-wide styling */
   .donation-form .submit-btn {
     background-color: var(--primary-green);
@@ -317,27 +279,17 @@ Charitable Trust{% endblock %} {% block page_css %}
     .amount-grid {
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     }
-    
-    .purpose-options {
-      grid-template-columns: 1fr;
-    }
-    
+
     .donation-form {
       padding: 30px 20px;
     }
   }
 </style>
 {% endblock %} {% block content %}
-<!-- Hero Section -->
-<div class="page-heading donate-hero">
-  <img
-    src="{% static 'img/sonadi-logo.jpg' %}"
-    alt="Sonadi Logo"
-    class="logo-img"
-  />
-  <div class="page-heading-text">
-    <h2>Support Us. Save Lives.</h2>
-    <h3>Your contribution brings care and compassion to animals in need.</h3>
+<div class="page-hero hero--donate">
+  <div class="page-hero-content">
+    <h1>Support Us. Save Lives.</h1>
+    <p>Your contribution brings care and compassion to animals in need.</p>
   </div>
 </div>
 
@@ -399,8 +351,8 @@ Charitable Trust{% endblock %} {% block page_css %}
             <span class="impact">Support shelter for a week</span>
           </div>
           <div class="amount-option custom-amount">
-            <input type="number" id="customAmount" placeholder="₹ Enter amount" min="50" step="1">
-            <span class="impact">Custom amount</span>
+            <input type="number" id="customAmount" placeholder="₹ Custom" min="50" step="1">
+            <span class="impact">Enter amount</span>
           </div>
         </div>
         
@@ -409,11 +361,11 @@ Charitable Trust{% endblock %} {% block page_css %}
 
       <!-- Donor Information -->
       <div class="donor-info">
-        <h3>Donor Information (Optional)</h3>
+        <h3>Donor Information</h3>
         <div class="form-row">
           <div class="form-group">
-            <input type="text" id="donor_name" name="donor_name" placeholder=" " autocomplete="name">
-            <label for="donor_name">Your Name</label>
+            <input type="text" id="donor_name" name="donor_name" placeholder=" " autocomplete="name" required>
+            <label for="donor_name">Your Name *</label>
           </div>
           <div class="form-group">
             <input type="email" id="donor_email" name="donor_email" placeholder=" " autocomplete="email">
@@ -422,36 +374,13 @@ Charitable Trust{% endblock %} {% block page_css %}
         </div>
         <div class="form-row">
           <div class="form-group">
-            <input type="tel" id="donor_phone" name="donor_phone" placeholder=" " autocomplete="tel">
-            <label for="donor_phone">Your Phone Number</label>
+            <input type="tel" id="donor_phone" name="donor_phone" placeholder=" " autocomplete="tel" required>
+            <label for="donor_phone">Your Phone Number *</label>
           </div>
           <div class="form-group">
             <textarea id="donor_message" name="donor_message" placeholder=" " autocomplete="off"></textarea>
             <label for="donor_message">Message (Optional)</label>
           </div>
-        </div>
-      </div>
-
-      <!-- Donation Purpose -->
-      <div class="donation-purpose">
-        <h3>Donation Purpose</h3>
-        <div class="purpose-options">
-          <label class="purpose-option">
-            <input type="radio" name="purpose" value="general" checked>
-            <span>General Animal Welfare</span>
-          </label>
-          <label class="purpose-option">
-            <input type="radio" name="purpose" value="medical">
-            <span>Emergency Medical Care</span>
-          </label>
-          <label class="purpose-option">
-            <input type="radio" name="purpose" value="rescue">
-            <span>Animal Rescue Operations</span>
-          </label>
-          <label class="purpose-option">
-            <input type="radio" name="purpose" value="shelter">
-            <span>Shelter Maintenance</span>
-          </label>
         </div>
       </div>
 

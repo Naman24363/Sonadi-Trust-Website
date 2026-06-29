@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         trigger: ".cta-section",
         start: "top 80%",
         end: "bottom 20%",
-        toggleActions: "play none none reverse",
+        toggleActions: "play none none none",
         markers: false, // Set to true for debugging
         onEnter: () => {
           // console.log("CTA button animation triggered!"); // Removed for production

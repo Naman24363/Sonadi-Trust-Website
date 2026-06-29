@@ -30,7 +30,7 @@ const CoreAnimations = {
                     scrollTrigger: {
                         trigger: element,
                         start: 'top 80%',
-                        toggleActions: 'play none none reverse'
+                        toggleActions: 'play none none none'
                     },
                     duration: 1,
                     opacity: 0,
@@ -45,7 +45,7 @@ const CoreAnimations = {
                     scrollTrigger: {
                         trigger: element,
                         start: 'top 80%',
-                        toggleActions: 'play none none reverse'
+                        toggleActions: 'play none none none'
                     },
                     duration: 1,
                     x: -100,
@@ -60,7 +60,7 @@ const CoreAnimations = {
                     scrollTrigger: {
                         trigger: element,
                         start: 'top 80%',
-                        toggleActions: 'play none none reverse'
+                        toggleActions: 'play none none none'
                     },
                     duration: 1,
                     x: 100,
@@ -113,22 +113,34 @@ const CoreAnimations = {
 
     // Counter animations
     animateCounters() {
-        const counters = document.querySelectorAll('.counter');
+        // Matches both .counter and .counter-number used across pages
+        const counters = document.querySelectorAll('.counter, .counter-number');
         
         counters.forEach(counter => {
-            const target = parseInt(counter.dataset.count || counter.textContent);
-            
-            gsap.from(counter, {
+            // data-counter on the parent .stat-item, fallback to text content
+            const parent = counter.closest('[data-counter]');
+            const raw = parent
+                ? parent.getAttribute('data-counter')
+                : counter.textContent.replace(/[^0-9]/g, '');
+            const target = parseInt(raw, 10);
+            if (isNaN(target)) return;
+
+            // Store the emoji/prefix before the number so we can restore it
+            const prefix = counter.textContent.replace(/[0-9]+$/, '').trim();
+
+            const obj = { val: 0 };
+            gsap.to(obj, {
                 scrollTrigger: {
                     trigger: counter,
                     start: 'top 80%'
                 },
                 duration: 2,
-                textContent: 0,
-                snap: { textContent: 1 },
+                val: target,
                 ease: 'power2.out',
-                onUpdate: function() {
-                    counter.textContent = Math.ceil(this.targets()[0].textContent);
+                onUpdate: function () {
+                    counter.textContent = prefix
+                        ? prefix + ' ' + Math.ceil(obj.val)
+                        : Math.ceil(obj.val);
                 }
             });
         });
@@ -145,7 +157,7 @@ const CoreAnimations = {
                     trigger: card,
                     start: 'top 80%',
                     end: 'bottom 20%',
-                    toggleActions: 'play none none reverse'
+                    toggleActions: 'play none none none'
                 },
                 duration: 0.8,
                 y: 50,

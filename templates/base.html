@@ -72,7 +72,6 @@
     
     <!-- CSS - Modular CSS files (optimized loading order) -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'css/Styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/animations.css' %}">
@@ -112,34 +111,29 @@
     <!-- AOS JavaScript -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize AOS with error handling
-        try {
-            if (typeof AOS !== 'undefined') {
-                AOS.init({
-                    duration: 1000,
-                    easing: 'ease-out-cubic',
-                    once: true,
-                    offset: 120,
-                    delay: 100,
-                    anchorPlacement: 'top-bottom'
-                });
-                
-                // Refresh AOS on dynamic content changes
-                document.addEventListener('DOMContentLoaded', function() {
-                    AOS.refresh();
-                });
-            } else {
-                console.warn('AOS library not loaded - scroll animations disabled');
+        // Initialize AOS once, inside DOMContentLoaded so the DOM is ready
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                if (typeof AOS !== 'undefined') {
+                    AOS.init({
+                        duration: 1000,
+                        easing: 'ease-out-cubic',
+                        once: true,
+                        offset: 120,
+                        delay: 100,
+                        anchorPlacement: 'top-bottom'
+                    });
+                }
+            } catch (error) {
+                console.error('Error initializing AOS:', error);
             }
-        } catch (error) {
-            console.error('Error initializing AOS:', error);
-        }
+        });
     </script>
     
     {% block extra_js %}{% endblock %}
     
     <script>
-        // Highlight active navigation link
+        // Highlight active navigation link + close mobile nav on link tap
         document.addEventListener('DOMContentLoaded', function() {
             const currentPath = window.location.pathname;
             const navLinks = document.querySelectorAll('.nav-link');
@@ -148,6 +142,15 @@
                 if (link.getAttribute('href') === currentPath) {
                     link.classList.add('active');
                 }
+            });
+
+            // Close the hamburger menu when any nav link is tapped on mobile
+            const navToggle = document.getElementById('nav-toggle');
+            const allNavLinks = document.querySelectorAll('.nav-links a');
+            allNavLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (navToggle) navToggle.checked = false;
+                });
             });
             
             // Initialize advanced animations after a short delay

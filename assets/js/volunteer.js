@@ -1,70 +1,46 @@
 // ========================================
-// VOLUNTEER PAGE FUNCTIONALITY - AUTO-ONLY VERSION
+// VOLUNTEER PAGE - SLIDESHOW + FORM UX
 // ========================================
 
-console.log('🎬 Volunteer JS loading...');
+document.addEventListener('DOMContentLoaded', function () {
 
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 DOM Content Loaded');
-    
-    // Find slideshow elements
+    // ── Slideshow ────────────────────────────────────────────────────
     const slideshow = document.querySelector('.slideshow');
     const slides = document.querySelectorAll('.slide');
-    
-    console.log('🔍 Found slideshow:', slideshow);
-    console.log('🔍 Found slides:', slides.length);
-    
-    if (!slideshow || slides.length === 0) {
-        console.log('❌ No slideshow or slides found');
-        return;
-    }
-    
-    let currentSlide = 0;
-    let autoPlayInterval;
-    
-    // Simple function to show a specific slide
-    function showSlide(index) {
-        console.log('🎯 Showing slide:', index);
-        
-        // Hide all slides
-        slides.forEach((slide, i) => {
-            slide.style.display = 'none';
-            slide.classList.remove('active');
-        });
-        
-        // Show the target slide
-        slides[index].style.display = 'block';
-        slides[index].classList.add('active');
-        
-        currentSlide = index;
-    }
-    
-    function nextSlide() {
-        const next = (currentSlide + 1) % slides.length;
-        showSlide(next);
-    }
-    
-    // Start auto-play only
-    function startAutoPlay() {
-        autoPlayInterval = setInterval(nextSlide, 4000);
-        console.log('▶️ Auto-play started');
-    }
-    
-    // Initialize everything
-    function init() {
-        console.log('🔧 Initializing auto-only slideshow...');
-        
-        // Show first slide
-        showSlide(0);
-        
-        // Start auto-play if more than 1 slide
-        if (slides.length > 1) {
-            startAutoPlay();
+
+    if (slideshow && slides.length > 0) {
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(function (slide) {
+                slide.style.display = 'none';
+                slide.classList.remove('active');
+            });
+            slides[index].style.display = 'block';
+            slides[index].classList.add('active');
+            currentSlide = index;
         }
-        
-        console.log('✅ Auto-only slideshow initialized!');
+
+        showSlide(0);
+        if (slides.length > 1) {
+            setInterval(function () {
+                showSlide((currentSlide + 1) % slides.length);
+            }, 4000);
+        }
     }
-    
-    // Start initialization
-    init();
+
+    // ── Submit loading state ─────────────────────────────────────────
+    const form = document.querySelector('.volunteer-right form');
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            const btn = form.querySelector('button[type="submit"]');
+            if (!btn) return;
+            queueMicrotask(function () {
+                if (!e.defaultPrevented) {
+                    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Sending...';
+                    btn.disabled = true;
+                }
+            });
+        });
+    }
 });

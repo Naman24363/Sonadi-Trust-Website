@@ -8,7 +8,7 @@
   margin: 0px auto;
   padding: 20px;
   border-radius: 16px;
-  box-shadow: 0 6px 32px rgba(76, 175, 80, 0.08);
+  box-shadow: 0 6px 32px rgba(30, 70, 32, 0.06);
 }
 
 .donate-section {
@@ -43,7 +43,7 @@
   max-width: 320px;
   min-width: 280px;
   flex: 1;
-  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.1);
+  box-shadow: 0 6px 20px rgba(30, 70, 32, 0.07);
   margin-bottom: 0;
   background: white;
   transition: all 0.3s ease;
@@ -51,7 +51,7 @@
 
 .donate-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(76, 175, 80, 0.15);
+  box-shadow: 0 10px 30px rgba(30, 70, 32, 0.1);
 }
 
 .donate-card h3 {
@@ -177,7 +177,7 @@
 .donation-heading {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #2e7d32;
+  color: var(--primary-green-darkest);
   margin: 0;
 }
 
@@ -197,7 +197,7 @@
 .bank-section {
   margin: 60px 0;
   padding: 40px 20px;
-  background: linear-gradient(135deg, #f8fffe 0%, #e8f5e8 100%);
+  background: linear-gradient(135deg, #faf7f2 0%, #f0ebe2 100%);
   border-radius: 16px;
 }
 

@@ -7,119 +7,19 @@
 <link rel="stylesheet" href="{% static 'css/founders.css' %}">
 {% endblock %}
 
-{% block extra_css %}
-<style>
-  .founders-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    justify-content: center;
-    padding: 40px 20px;
-    background-color: #f9f9f9;
-  }
-
-  .founder-card {
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    max-width: 420px;
-    padding: 30px;
-    text-align: center;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    cursor: pointer;
-  }
-
-  .founder-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-  }
-
-  .founder-img {
-    width: 100%;
-    max-width: 170px;
-    height: auto;
-    object-fit: cover;
-    margin: 0 auto 20px auto;
-    display: block;
-    border: 3px solid var(--primary-green, #4caf50);
-    border-radius: 14px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
-  }
-
-  .founder-card:hover .founder-img {
-    transform: scale(1.02);
-  }
-
-  .founder-name {
-    font-size: 1.5rem;
-    color: var(--text-main, #333);
-    margin-bottom: 8px;
-  }
-
-  .founder-role {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--primary-green, #4caf50);
-    margin-bottom: 15px;
-  }
-
-  .founder-quote {
-    font-style: italic;
-    color: #666;
-    margin-bottom: 20px;
-  }
-
-  .founder-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: left;
-  }
-
-  .founder-list li {
-    position: relative;
-    padding-left: 24px;
-    margin-bottom: 12px;
-    font-size: 1rem;
-    color: #444;
-  }
-
-  .founder-list li::before {
-    content: "✔";
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--primary-green, #4caf50);
-    font-weight: bold;
-  }
-
-  .caption {
-    font-size: 0.9rem;
-    color: #777;
-    margin-top: -10px;
-    margin-bottom: 10px;
-  }
-</style>
-{% endblock %}
+{% comment %}All founders styles live in founders.css{% endcomment %}
 
 {% block content %}
 
-    <!-- Page Heading -->
-    <div class="page-heading">
-      <img
-        src="{% static 'img/sonadi-logo.jpg' %}"
-        alt="Sonadi Charitable Trust Logo"
-        class="logo-img"
-      />
-      <div class="page-heading-text">
-        <h2>Our Founders</h2>
-        <h3>Meet the Visionaries Behind Sonadi</h3>
+    <div class="page-hero hero--founders">
+      <div class="page-hero-content">
+        <h1>Our Founders</h1>
+        <p>Meet the Visionaries Behind Sonadi</p>
       </div>
     </div>
 
     <!-- Quote -->
-    <blockquote class="highlight-quote-founders">
+    <blockquote class="highlight-quote">
       “Compassion for animals is intimately connected with goodness of
       character.” – Arthur Schopenhauer
     </blockquote>

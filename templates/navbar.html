@@ -1,8 +1,13 @@
 {% load static %}
 <div class="navbar-wrapper">
   <input type="checkbox" id="nav-toggle" class="nav-toggle">
-  <label for="nav-toggle" class="nav-toggle-label">☰</label>
-  <span class="mobile-site-title">Sonadi Charitable Trust</span>
+
+  <div class="nav-brand">
+    <img src="{% static 'img/sonadi-logo.jpg' %}" alt="Sonadi Logo" class="nav-logo">
+    <span class="nav-brand-name">Sonadi Charitable Trust</span>
+  </div>
+
+  <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation">☰</label>
 
   <nav class="navbar nav-links">
     <a href="{% url 'home' %}">Home</a>

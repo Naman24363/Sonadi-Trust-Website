@@ -36,13 +36,13 @@
   gap: 20px;
   flex-wrap: wrap;
   max-width: 1100px;
-  margin: 40px auto;
+  margin: 24px auto;
   padding: 0 20px;
   box-sizing: border-box;
 }
 
 .about-text {
-  margin-top: -50px;
+  margin-top: 0;
   flex: 1;
   min-width: 300px;
   max-width: 50%;
@@ -79,19 +79,7 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Quote Styles */
-.highlight-quote-about {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 16px 24px;
-  font-style: italic;
-  background-color: #f1f1f1;
-  border-left: 6px solid var(--primary-green, #2e7d32);
-  color: #444;
-  text-align: center;
-  font-size: 1.05rem;
-  border-radius: 6px;
-}
+/* Quote uses shared .highlight-quote from base.css */
 
 /* About page specific animations - start hidden */
 .cta-section .btn {
@@ -102,7 +90,7 @@
 
 /* CTA Button */
 .cta-button:hover {
-  background-color: #287d35;
+  background-color: #163518;
 }
 
 /* Mobile Responsive */
@@ -126,4 +114,25 @@
   .about-image-container img {
     width: 90%;
   }
+}
+
+/* CTA Section — dark green banner */
+.cta-section.hero-section {
+  border-radius: 16px;
+  margin: 40px 20px;
+  max-width: 1060px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-heading {
+  color: #000;
+  font-size: 1.8rem;
+}
+
+.cta-subtext {
+  color: #000;
+  font-size: 1.05rem;
+  max-width: 700px;
+  margin: 0 auto 20px;
 }

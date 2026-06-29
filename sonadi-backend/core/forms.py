@@ -51,7 +51,7 @@ class ContactForm(forms.ModelForm):
         error_messages={"required": "Please enter your email address."},
     )
     message = forms.CharField(
-        widget=forms.Textarea(attrs={"class": "input-field"}),
+        widget=forms.Textarea(attrs={"class": "input-field", "placeholder": " "}),
         validators=[validate_message],
         error_messages={"required": "Please enter a message."},
     )
@@ -60,9 +60,9 @@ class ContactForm(forms.ModelForm):
         model = ContactMessage
         fields = ["name", "email", "phone", "message"]
         widgets = {
-            "name":  forms.TextInput(attrs={"class": "input-field"}),
-            "email": forms.EmailInput(attrs={"class": "input-field"}),
-            "phone": forms.TextInput(attrs={"class": "input-field"}),
+            "name":  forms.TextInput(attrs={"class": "input-field", "placeholder": " "}),
+            "email": forms.EmailInput(attrs={"class": "input-field", "placeholder": " "}),
+            "phone": forms.TextInput(attrs={"class": "input-field", "placeholder": " "}),
         }
 
 
@@ -83,7 +83,7 @@ class TestimonialForm(forms.ModelForm):
         error_messages={"required": "Please enter your email address."},
     )
     message = forms.CharField(
-        widget=forms.Textarea(attrs={"class": "input-field"}),
+        widget=forms.Textarea(attrs={"class": "input-field", "placeholder": " "}),
         validators=[validate_message],
         error_messages={"required": "Please enter your testimonial message."},
     )
@@ -102,6 +102,10 @@ class TestimonialForm(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # Add placeholder so floating labels work via :not(:placeholder-shown)
+        for field_name in ["title", "name", "animal_name", "email", "phone"]:
+            if field_name in self.fields:
+                self.fields[field_name].widget.attrs.setdefault("placeholder", " ")
         # Style the image field properly
         self.fields["image"].widget.attrs.update({
             "class": "form-control",
@@ -127,7 +131,7 @@ class VolunteerForm(forms.ModelForm):
         error_messages={"required": "Please enter your email address."},
     )
     message = forms.CharField(
-        widget=forms.Textarea(attrs={"class": "input-field"}),
+        widget=forms.Textarea(attrs={"class": "input-field", "placeholder": " "}),
         validators=[validate_message],
         error_messages={"required": "Please tell us why you want to volunteer."},
     )
@@ -136,9 +140,9 @@ class VolunteerForm(forms.ModelForm):
         model = Volunteer
         fields = ["name", "email", "phone", "message"]
         widgets = {
-            "name":  forms.TextInput(attrs={"class": "input-field"}),
-            "email": forms.EmailInput(attrs={"class": "input-field"}),
-            "phone": forms.TextInput(attrs={"class": "input-field"}),
+            "name":  forms.TextInput(attrs={"class": "input-field", "placeholder": " "}),
+            "email": forms.EmailInput(attrs={"class": "input-field", "placeholder": " "}),
+            "phone": forms.TextInput(attrs={"class": "input-field", "placeholder": " "}),
         }
 
 
@@ -159,7 +163,7 @@ class AdoptionForm(forms.ModelForm):
         error_messages={"required": "Please enter your email address."},
     )
     reason = forms.CharField(
-        widget=forms.Textarea(attrs={"rows": 3}),
+        widget=forms.Textarea(attrs={"rows": 3, "placeholder": " "}),
         validators=[validate_message],
         error_messages={"required": "Please explain why you want to adopt."},
     )
@@ -177,3 +181,13 @@ class AdoptionForm(forms.ModelForm):
             "animal_breed",
             "animal_personality",
         ]
+        widgets = {
+            "name":         forms.TextInput(attrs={"placeholder": " "}),
+            "email":        forms.EmailInput(attrs={"placeholder": " "}),
+            "phone":        forms.TextInput(attrs={"placeholder": " "}),
+            "animal_name":  forms.TextInput(attrs={"placeholder": " "}),
+            "animal_age":   forms.TextInput(attrs={"placeholder": " "}),
+            "animal_gender":forms.TextInput(attrs={"placeholder": " "}),
+            "animal_breed": forms.TextInput(attrs={"placeholder": " "}),
+            "animal_personality": forms.TextInput(attrs={"placeholder": " "}),
+        }

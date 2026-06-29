@@ -4,14 +4,17 @@
 
 /* CSS Variables */
 :root {
-  --primary-green: #4caf50;
-  --primary-green-dark: #45a049;
-  --navbar-bg: #000;
-  --footer-bg: #333;
+  --primary-green: #1e4620;
+  --primary-green-dark: #163518;
+  --primary-green-darkest: #0d2010;
+  --navbar-bg: #faf7f2;
+  --footer-bg: #1e4620;
   --accent-yellow: #ffd700;
-  --accent-orange: #f5a623;
+  --accent-orange: #e07b3a;
   --white: #fff;
   --text-main: #333;
+  --body-bg: #faf7f2;
+  --border-warm: #e8e2d9;
 }
 
 /* Universal font family */
@@ -35,7 +38,7 @@ html, body {
 
 body {
   font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
+  background-color: var(--body-bg);
   color: var(--text-main);
 }
 
@@ -44,10 +47,7 @@ html {
 }
 
 header {
-  background-color: var(--primary-green);
-  padding: 20px;
-  text-align: center;
-  color: var(--white);
+  display: none;
 }
 
 img {
@@ -81,7 +81,18 @@ img {
 }
 
 .btn--primary:hover {
-  background-color: #e0901c;
+  background-color: #c5652a;
+}
+
+.btn--outline {
+  background-color: transparent;
+  border: 2px solid var(--primary-green);
+  color: var(--primary-green);
+}
+
+.btn--outline:hover {
+  background-color: var(--primary-green);
+  color: var(--white);
 }
 
 /* Magnetic button effect */
@@ -120,11 +131,9 @@ img {
   background-color: var(--primary-green-dark);
 }
 
-/* Section Styles */
+/* Section Styles — no global max-width; each page controls its own layout */
 section {
-  padding: 50px 20px;
-  max-width: 1200px;
-  margin: auto;
+  padding: 40px 20px;
   text-align: center;
 }
 
@@ -189,6 +198,20 @@ textarea {
   color: red;
   font-size: 0.9rem;
   margin-top: 4px;
+}
+
+/* Unified blockquote / highlight quote — used across all pages */
+.highlight-quote {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 16px 24px;
+  font-style: italic;
+  background-color: #f0ebe2;
+  border-left: 6px solid var(--accent-orange);
+  color: #5c4a30;
+  text-align: center;
+  font-size: 1.05rem;
+  border-radius: 0 6px 6px 0;
 }
 
 /* Message Styles */

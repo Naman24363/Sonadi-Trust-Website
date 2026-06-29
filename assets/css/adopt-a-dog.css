@@ -29,7 +29,7 @@
 /* Pulse animation for attention */
 @keyframes gentlePulse {
   0% { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); }
-  50% { box-shadow: 0 4px 20px rgba(76, 175, 80, 0.15); }
+  50% { box-shadow: 0 4px 20px rgba(30, 70, 32, 0.1); }
   100% { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); }
 }
 
@@ -60,7 +60,7 @@
   position: relative;
   border: 2px solid transparent;
   background-color: var(--white);
-  border: #388e3c solid 1px;
+  border: 1px solid var(--border-warm);
   min-height: 400px;
   display: flex;
   flex-direction: column;
@@ -82,7 +82,7 @@
   right: 0;
   bottom: 0;
   background: linear-gradient(135deg, 
-    rgba(76, 175, 80, 0.1) 0%, 
+    rgba(30, 70, 32, 0.07) 0%, 
     rgba(46, 125, 50, 0.15) 100%);
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -104,15 +104,14 @@
   opacity: 0;
   transition: all 0.4s ease;
   z-index: 2;
-  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+  box-shadow: 0 4px 15px rgba(30, 70, 32, 0.2);
   backdrop-filter: blur(10px);
 }
 
 .animal-card:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-  border-color: rgba(76, 175, 80, 0.3);
-  transform: translateY(-5px);
+  border-color: rgba(30, 70, 32, 0.2);
 }
 
 .animal-card:hover::before {
@@ -159,7 +158,7 @@
 
 .animal-info h3 {
   margin: 0 0 6px;
-  color: #2e7d32;
+  color: var(--primary-green-darkest);
   font-size: 1.1rem;
   transition: all 0.3s ease;
   font-weight: 600;
@@ -186,7 +185,7 @@
   color: #555;
 }
 
-/* Intro and Quote */
+/* Intro */
 .adopt-intro {
   max-width: 800px;
   margin: 10px auto 5px;
@@ -205,83 +204,31 @@ section > p {
   color: #444;
 }
 
-.highlight-quote {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 16px 24px;
-  margin-bottom: -20px;
-  font-style: italic;
-  background-color: #f1f1f1;
-  border-left: 6px solid var(--primary-green, #2e7d32);
-  color: #444;
-  text-align: center;
-  font-size: 1.05rem;
-  border-radius: 6px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.highlight-quote::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(76, 175, 80, 0.1),
-    transparent
-  );
-  transition: left 0.6s ease;
-}
-
-.highlight-quote:hover::before {
-  left: 100%;
-}
-
-.highlight-quote:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  border-left: 6px solid #2e7d32;
-  background-color: #f8f9fa;
-}
-
 /* Modal Styling */
 .modal {
   display: none;
   position: fixed;
-  z-index: 1000;
+  z-index: 2000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  overflow-y: auto;
-  z-index: 2000;
-  overflow: auto;
   background-color: rgba(0, 0, 0, 0.6);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .modal-content {
-  background: white;
-  margin: 25px auto;
-  padding: 10px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 600px;
-  position: relative;
-  animation: fadeIn 0.4s ease-in;
   background-color: #fff;
   margin: 5% auto;
   padding: 24px 20px;
   border-radius: 10px;
   width: 98%;
   max-width: 700px;
+  position: relative;
   box-sizing: border-box;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+  animation: fadeIn 0.4s ease-in;
   font-size: 1.15rem;
   color: #222;
 }
@@ -303,17 +250,12 @@ section > p {
 
 .close {
   position: absolute;
-  top: 12px;
-  right: 16px;
-  font-size: 24px;
-  cursor: pointer;
-  color: #999;
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
   top: 10px;
   right: 18px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #aaa;
   z-index: 10;
 }
 
@@ -325,9 +267,8 @@ section > p {
   display: block;
   font-weight: bold;
   margin-top: 6px;
-  margin-bottom: 4px;
   margin-bottom: 6px;
-  color: var(--primary-green, #2e7d32);
+  color: var(--primary-green, var(--primary-green-darkest));
 }
 
 .form-group input,

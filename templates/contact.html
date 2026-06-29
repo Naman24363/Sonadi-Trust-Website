@@ -7,25 +7,7 @@
 <link rel="stylesheet" href="{% static 'css/contact.css' %}">
 {% endblock %}
 
-{% block extra_css %}
-<style>
-  /* Responsive fallback */
-  @media (max-width: 768px) {
-    .no-class-grid {
-      grid-template-columns: 1fr !important;
-    }
-  }
-
-  /* New card container */
-  .contact-card-wrapper {
-    background-color: #ffffff;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    border-radius: 20px;
-    padding: 40px 30px;
-    margin-top: 2rem;
-  }
-</style>
-{% endblock %}
+{% block extra_css %}{% endblock %}
 
 {% block content %}
 
@@ -37,16 +19,10 @@
     </div>
     {% endif %}
 
-    <!-- Page Heading -->
-    <div class="page-heading">
-      <img
-        src="{% static 'img/sonadi-logo.jpg' %}"
-        alt="Sonadi Charitable Trust Logo"
-        class="logo-img"
-      />
-      <div class="page-heading-text">
-        <h2>Contact Us</h2>
-        <h3>We're Here to Help</h3>
+    <div class="page-hero hero--contact">
+      <div class="page-hero-content">
+        <h1>Contact Us</h1>
+        <p>We're Here to Help</p>
       </div>
     </div>
 
@@ -55,14 +31,7 @@
 
       <!-- Card Wrapper Added -->
       <div class="contact-card-wrapper">
-        <div
-          class="no-class-grid"
-          style="
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-          "
-        >
+        <div class="contact-grid">
           <!-- Form column -->
           <section>
             <form method="POST" action="">

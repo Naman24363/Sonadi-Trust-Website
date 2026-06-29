@@ -195,38 +195,35 @@
 
     <script>
     function razorpayHandler(response) {
-        // Payment successful
+        // POST the payment params — keeps signature out of URLs, logs, and browser history
         const form = document.createElement('form');
-        form.method = 'GET';
+        form.method = 'POST';
         form.action = '{% url "donate_success" %}';
-        
-        const inputs = [
-            { name: 'razorpay_payment_id', value: response.razorpay_payment_id },
-            { name: 'razorpay_order_id', value: response.razorpay_order_id },
-            { name: 'razorpay_signature', value: response.razorpay_signature }
-        ];
-        
-        inputs.forEach(input => {
-            const hiddenField = document.createElement('input');
-            hiddenField.type = 'hidden';
-            hiddenField.name = input.name;
-            hiddenField.value = input.value;
-            form.appendChild(hiddenField);
+
+        // Django requires CSRF token on POST requests
+        const csrf = document.createElement('input');
+        csrf.type = 'hidden';
+        csrf.name = 'csrfmiddlewaretoken';
+        csrf.value = '{{ csrf_token }}';
+        form.appendChild(csrf);
+
+        const params = {
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_order_id:   response.razorpay_order_id,
+            razorpay_signature:  response.razorpay_signature,
+        };
+
+        Object.entries(params).forEach(function([name, value]) {
+            const input = document.createElement('input');
+            input.type  = 'hidden';
+            input.name  = name;
+            input.value = value;
+            form.appendChild(input);
         });
-        
+
         document.body.appendChild(form);
         form.submit();
     }
-
-    // Handle payment failure
-    window.addEventListener('load', function() {
-        const razorpayButton = document.querySelector('[data-payment_button_id]');
-        if (razorpayButton) {
-            razorpayButton.addEventListener('error', function(error) {
-                window.location.href = '{% url "donate_failure" %}?error_description=' + encodeURIComponent(error.description || 'Payment failed');
-            });
-        }
-    });
     </script>
 
     <div class="security-badges">
